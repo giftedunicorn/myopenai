@@ -15,7 +15,7 @@ const App = () => {
                 ))}
             </ul>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="max-w-xl w-full mx-auto relative">
                 <input
                     className="w-full p-3 focus-visible:outline-gray-300 border border-gray-300 rounded-md shadow-xl focus:shadow-2xl transition-all"
                     type="text"

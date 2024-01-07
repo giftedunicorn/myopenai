@@ -8,7 +8,7 @@ interface MessageCardProps {
 type AvatarProps = Pick<Message, "role">;
 
 function Avatar({ role }: AvatarProps) {
-    const getName = () => role === 'user' ? 'You' : 'AI'
+    const getName = () => role === 'user' ? 'U' : 'AI'
 
   return (
     <span
