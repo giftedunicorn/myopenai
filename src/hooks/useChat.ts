@@ -23,9 +23,6 @@ export function useChat({
     initialInput = '',
     initialMessages = [],
 }: UseChatProps = {}) : UseChatHelpers {
-    const hookId = useId();
-    const chatId = id || hookId
-
     const [input, setInput] = useState(initialInput);
     const [messages, setMessages] = useState<Message[]>(initialMessages);
     const abortControllerRef = useRef<AbortController | null>(null)
@@ -39,16 +36,17 @@ export function useChat({
         const abortController = new AbortController()
         abortControllerRef.current = abortController
 
-        console.log('handleSubmit');
         const text = input.trim();
         if (!text) return;
 
-        const newMessage = {
-            id: hookId,
+        const userMessage: Message = {
+            id: nanoid(),
             text,
             role: 'user',
             createdAt: new Date(),
         };
+
+        setMessages([...messages, userMessage])
 
         const res = await fetch(api, {
             method: 'POST',
@@ -77,18 +75,16 @@ export function useChat({
             }
 
             result += decoder(value)
-            console.log(result)
 
             const newMessage: Message = {
                 id: nanoid(),
-                text,
+                text: result,
                 role: 'assistant',
                 createdAt: new Date(),
             }
-            setMessages([...messages, newMessage])
+            setMessages([...messages, userMessage, newMessage])
         }
-
-    }, [api, hookId, input, messages]);
+    }, [api, input, messages]);
 
     return { messages, input, handleSubmit, handleInputChange };
 }
