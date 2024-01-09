@@ -5,7 +5,7 @@ import { Message } from "@/types"
 import { useChat } from "@/hooks/useChat"
 
 const App = () => {
-    const{ messages, input, handleSubmit, handleInputChange } = useChat()
+    const{ messages, input, handleSubmit, handleInputChange, isLoading, stop, reload } = useChat()
     
     return (
         <div className="flex h-full flex-col w-full max-w-xl pb-36 pt-9 mx-auto stretch">
