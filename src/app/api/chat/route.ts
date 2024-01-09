@@ -11,9 +11,9 @@ export async function POST(req: Request) {
     // get parameters from request
     const { prompt } = await req.json()
 
-    const response = await openai.completions.create({
-        model: 'text-davinci-003',
-        prompt,
+    const response = await openai.chat.completions.create({
+        model: 'gpt-4',
+        messages: [{ role: 'user', content: prompt }],
         temperature: 0.6,
         max_tokens: 300,
         stream: true,
